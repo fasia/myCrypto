@@ -5,6 +5,7 @@
 
 #NOITCE: the length of the keyword is found manually
 
+import collections
 
 def getMessage():
     return open('file2-35121.txt.enc').read()
@@ -28,20 +29,24 @@ def findKeyword(s):
 #myArray2 = [ 'u', 'k', 'u', 'j', 'k', 'h', 'g', 'h','k', 'j', 'j', 'h']
 
 def shiftKeywordToCorrectPlace():
-    for i in range(4):
-        myArray2.pop(0)
-
+    myArray2[keywordLength:]=[] # first we cut the repeatitive part of the keyword. Just keep the keylength
+    temp = divmod(startingPoint, keywordLength) # 68/12 = 5 and 8 remainder
+    t = keywordLength-temp[1] # temp[1] == 8 remainder. the actual starting point of the keyword
+    #for i in range(t): # so we shift to left 4 times (or we can shift to right 8 times)
+     #   myArray2.pop(0)
+    de = collections.deque(myArray2)
+    de.rotate(temp[1])
     #now we translate keyword from the ascii code to char
-    for i in range(len(myArray2)):
-        myArray.append(chr(myArray2[i]))
-
+    for i in range(len(de)):
+        myArray.append(chr(de[i]))
+    return de
 
 #decode the string
 def decoding():
     decode=''
     textCounter=0
     for m in m1:
-        num = (ord(m) - myArray2[textCounter%keywordLength])% 256
+        num = (ord(m) - de[textCounter%keywordLength])% 256
         #print 'm is:',ord(m),'key: ',chr(myArray2[textCounter%keywordLength]), myArray2[textCounter%keywordLength],'num:', num
         decode+=chr(num)
         textCounter +=1
@@ -54,11 +59,10 @@ knownWord = 'Hello, Faezeh Siavashi!'
 startingPoint=68
 m1=getMessage()
 findKeyword(startingPoint)
-temp = divmod(startingPoint,keywordLength)
-textCounter = keywordLength-temp[1]
-shiftKeywordToCorrectPlace()
+de =shiftKeywordToCorrectPlace()
+
 
 print decoding()
-print myArray2
+print de
 print myArray
 
