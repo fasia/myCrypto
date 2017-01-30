@@ -1,2 +1,4 @@
 # myCrypto
-It is my first commit of cryptography parctices
+The folder contains solutions for the course Cryptography. 
+
+
