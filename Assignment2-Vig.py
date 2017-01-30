@@ -1,9 +1,17 @@
-# from 69th char in the string, "Hello, Faezeh Siavashi!" can be found
-#so, I only search this part of the encoded string
+# Author: Faezeh Siavashi
+# Date= Jan 30 2017
 
-# author: Faezeh Siavashi
+#Method: Vigenere
+#Alphabet: ASCII table, all of 256 symbols
+#Data Type: Text file
+#Hint: The file contains phrase “Hello, <Your First name Your Last name>!” (as in the table below). 
+#This phrase is coming somewhere at the second line of the plaintext!
+
+
+# from 69th char in the string, "Hello, Faezeh Siavashi!" can be found. so, I only search this part of the encoded string
 
 #NOITCE: the length of the keyword is found manually
+
 
 import collections
 
@@ -17,6 +25,8 @@ def decodeMessage(symbol, msg, k):
         myArray2.append(k)
     return num
 
+
+#For a given characther, search all range of ascii codes until find the match. Then add the ascii 
 def findKeyword(s):
     for symbol in knownWord:
         k = 0
@@ -54,14 +64,22 @@ def decoding():
 
 myArray = []
 myArray2 =[]
-keywordLength = 12
+#keylength is manually found based on the repeation of the same set of characters. 
+keywordLength = 12 
+# the given hint is to have a string as follow:
 knownWord = 'Hello, Faezeh Siavashi!'
+#starting point of the string should be from a position which we guess is the second line.
+#I found it by looking at the encoded string and guessing :D 
+# My finding is to have charecter 68th in the encoded string as the first character of the known string (Hello, ...)
 startingPoint=68
+#first we open the encoded string as m1
 m1=getMessage()
+# based on the starting point, we find the keyword. 
 findKeyword(startingPoint)
+# the following code is to calculate that what is the actual position of the key in location 68. 
+#Since the keyword length is 12 and we started from 68, therefore, 68th char is 8th key. (5 times 12 keyword = 60 and 8 = 68) 
+#so we need to shift the keyword array either 8 times to left or 4 times to right (either way we will have same result)
 de =shiftKeywordToCorrectPlace()
-
-
 print decoding()
 print de
 print myArray
