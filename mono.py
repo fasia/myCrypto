@@ -20,7 +20,7 @@ def getLetterFrequency(l):
 
 def replaceLetter(l,msg):
         newString =list(msg)
-        print newString
+        print(newString)
         counter =0
         newletter= FreqArr.pop(0)
         if newletter is not 0:
@@ -32,14 +32,13 @@ def replaceLetter(l,msg):
         return newString
 
 
-
 # sort array to deceding
 def sortArray():
     for i in range(len(myarray)):
         arr.append(myarray[i])
     arr.sort()
     arr.reverse()
-    print arr
+    print(arr)
 
 
 
@@ -51,23 +50,45 @@ translated=''
 for b in msg:
     translated += b
 
-print 'trans:', translated
+print('trans:', translated)
 
 #calculate each letter's frequency
 for m in range(MAX_KEY_SIZE):
-    #print 'the current symbol is:', m, chr(m)
+    #print('range max',m)
     getLetterFrequency(chr(m))
-print 'my array', myarray
+print('my array', myarray)
+
 #sort the array based on the maximum frequency
 sortArray()
 # the first element is the max
 
-for i in range(len(myarray)):
-    maxNum = arr.pop(0)
-    if maxNum is not 0:
-        print maxNum
-        print myarray.index(maxNum), chr(myarray.index(maxNum))
+#for i in range(len(myarray)):
+    #maxNum = arr.pop(0)
+    #if maxNum > 7:
+        #print('max num',maxNum)
+        #print(myarray.index(maxNum), chr(myarray.index(maxNum)))
         #translated = replaceLetter(chr(myarray.index(maxNum)),translated)
 
 #print translated
+ar1 =[]
+for h in range(MAX_KEY_SIZE):
+    #print('index is',myarray[h])
+    ar1.append([h,myarray[h]])
+#print(ar1)
+matchArray=[]
+for k in range(28):
+    matchArray.append([arr.pop(0),FreqArr.pop(0)])
+print('match arr now:', matchArray)
+#print(myarray)
+newSt =list(msg)
+for s in range(len(msg)):
+    print('my array',myarray[s], msg[s])
+    n = ord(msg[s])
+    if myarray[n]>7:
+        print('selected : ',matchArray.index(n))
+        #newSt[s]=matchArray[s][1]
+    else:
+        newSt[s]= msg[s]
+        #print('newST:', newSt)
 
+print('result', newSt)

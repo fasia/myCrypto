@@ -80,7 +80,7 @@ findKeyword(startingPoint)
 #Since the keyword length is 12 and we started from 68, therefore, 68th char is 8th key. (5 times 12 keyword = 60 and 8 = 68) 
 #so we need to shift the keyword array either 8 times to left or 4 times to right (either way we will have same result)
 de =shiftKeywordToCorrectPlace()
-print decoding()
-print de
-print myArray
+print (decoding())
+print (de)
+print (myArray)
 
