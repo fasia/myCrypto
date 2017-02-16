@@ -5,8 +5,11 @@
 # Alphabet: ASCII table, all of 256 symbols
 # Data Type: text
 
+
+6.587998E7  
+
 MAX_KEY_SIZE = 256
-FreqArr=['e',' ','t','a','o','i','n','s','r','h','d','l','u','c','m','f','y','w','g','p','b','v','k','x','q','j','z','0']
+FreqArr=['e','t','a','o','i','n','s','h','r','d','l','u']#,'c','m','f','y','w','g','p','b','v','k','x','q','j','z']
 
 #read the encoded file
 def getFile():
@@ -38,13 +41,16 @@ def sortArray():
         arr.append(myarray[i])
     arr.sort()
     arr.reverse()
-    print(arr)
+    # for i in range(len(arr)):
+    #     print(chr(myarray.index(arr[i])))
+    print('array of sorted letter',arr)
 
 
 
 msg = getFile()
 myarray = []
 arr = []
+orderedletter= ''
 # make a copy of the encoded message into a new string to manipulate it
 translated=''
 for b in msg:
@@ -72,23 +78,89 @@ sortArray()
 #print translated
 ar1 =[]
 for h in range(MAX_KEY_SIZE):
-    #print('index is',myarray[h])
+    #print('index',myarray[h], h)
     ar1.append([h,myarray[h]])
 #print(ar1)
 matchArray=[]
-for k in range(28):
-    matchArray.append([arr.pop(0),FreqArr.pop(0)])
+for k in range(len(myarray)):
+    matchArray.append([arr[k],chr(myarray.index(arr[k]))])
 print('match arr now:', matchArray)
 #print(myarray)
-newSt =list(msg)
-for s in range(len(msg)):
-    print('my array',myarray[s], msg[s])
-    n = ord(msg[s])
-    if myarray[n]>7:
-        print('selected : ',matchArray.index(n))
-        #newSt[s]=matchArray[s][1]
-    else:
-        newSt[s]= msg[s]
-        #print('newST:', newSt)
 
-print('result', newSt)
+
+
+print('ëm is :',msg.count('ëm'))
+print('vv is: ', msg.count('vv'))
+print('mv is :', msg.count('mv'))
+print('vë is :',msg.count('vë'))
+print('Ãm is :',msg.count('Ãm'))
+print('vm is :', msg.count('vm'))
+print('vvm is :', msg.count('vvm'))
+print('ê  is :', msg.count('ê '))
+print('ëmë is :', msg.count('ëmë'))
+
+print('vvmv is :', msg.count('vvmv'))
+
+result=''
+for m in msg:
+    if m == 'm':
+        result+= 't'
+    elif m== 'ë':
+        result += 'q'
+    elif m == 'ê':
+        result += 'h'
+    elif m == ' ':
+        result += 'e'
+    # elif m == '°':
+    #     result += 'n'
+    # elif m == '¡':
+    #     result += 's'
+    # elif m == '@':
+    #     result += 'h'
+    # elif m == '!':
+    #     result += 'd'
+    # elif m == '\x19':
+    #     result += 'l'
+    # elif m == ' ':
+    #     result += 'c'
+    # elif m == 'Ã':
+    #     result += 'w'
+    # elif m == '\x10':
+    #     result += 'w'
+    # elif m == 'e':
+    #     result += 'w'
+    else:
+        result +=m
+
+digraphsList= []
+numbers=[]
+for i in range(len(msg)-1):
+        if msg[i]+msg[i+1] not in digraphsList:
+            digraphsList.append(msg[i]+msg[i+1])
+            digraphsList.append(msg.count(msg[i] + msg[i + 1]))
+            numbers.append(msg.count(msg[i] + msg[i + 1]))
+
+print('dig',digraphsList)
+print('numbers', numbers)
+
+trigraphsList= []
+numbers2=[]
+for i in range(len(msg)-2):
+        if msg[i]+msg[i+1]+msg[i+2] not in trigraphsList:
+            trigraphsList.append(msg[i]+msg[i+1]+msg[i+2])
+            numbers2.append(msg.count(msg[i] + msg[i + 1]+msg[i+2]))
+            trigraphsList.append(msg.count(msg[i] + msg[i + 1]+msg[i+2]))
+
+
+print('tri', trigraphsList)
+print('numbers2', numbers2)
+# result2=''
+# for m in result:
+#     if m == 'ë':
+#         result2+='r'
+#     else:
+#         result2 +=m
+
+#result.replace('eê ', 'ent')
+
+print(result)
