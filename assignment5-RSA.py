@@ -16,52 +16,12 @@ def main():
     ct= int('0x89382d8b2c0acc896952',0)
     print('cipher is:',ct )
     phi_N = (p - 1) * (q - 1)
+    print('phi_n:', phi_N)
     d= modinv(e,phi_N)
-    print('d is: ',d)
-    decrypt(ct,d,n)
+    print('d is: ',hex(d))
+    #decrypt(ct,d,n)
+    #print('we have ',pow(ct,d)%n)
 
-    obj = DES.new(ct,DES.MODE_ECB)
-
-
-
-
-
-
-
-
-
-    msg=142
-    n1=143
-    e1=7
-    phi_N1= 120
-    d1= modinv(e1,phi_N1)
-    en = pow(msg,e1,n1)
-    print('encrypt is:', en)
-    decrypt(en, d1, n1)
-    ###########################################################
-    # p =11
-    # q=13
-    # e=7
-    # phi_N= (p-1)*(q-1)
-    # d= modinv(e,phi_N)
-    # print('d is:', d)
-    ###########################################################
-
-    #cipherText = int('0x89382d8b2c0acc896952',0)
-    print(phi_N)
-    #gcd, a, b = egcd(e, phi_N)
-    #gcd1, a1, b1 =egcd1(e, phi_N)
-    #d1=a1
-    #d = a
-    #print("n:  " + str(d))
-    #print("n1: "+ str(d1))
-
-    # Decrypt ciphertext
-    #pt = pow(cipherText, d, n)
-    #print("pt: " + str(pt))
-
-    #pt1= modinv(a,n)
-    #print("pt1: "+str(pt1))
 
 
 def egcd1(a, b):
@@ -77,6 +37,9 @@ def modinv(a, m):
         raise Exception('modular inverse does not exist')
     else:
         return x % m
+
+
+
 
 
 
